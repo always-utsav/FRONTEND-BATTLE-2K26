@@ -1,4 +1,4 @@
-export type Priority = 'Urgent' | 'Important' | 'General';
+export type Priority = 'Urgent' | 'Important' | 'New';
 
 export type Announcement = {
   id: string;
@@ -30,7 +30,7 @@ export const announcements: Announcement[] = [
     id: '3',
     title: 'Annual Tech Fest "Cygnus" Dates Announced',
     date: 'March 20, 2026',
-    priority: 'General',
+    priority: 'New',
     description: 'Get ready for MITS largest technical festival. Dates are confirmed for the first week of April.',
     link: '#'
   },
@@ -46,7 +46,7 @@ export const announcements: Announcement[] = [
     id: '5',
     title: 'Guest Lecture on AI & Machine Learning',
     date: 'March 10, 2026',
-    priority: 'General',
+    priority: 'New',
     description: 'Join us for an insightful session by industry experts on the future of AI. Open for all CSE/IT students.',
   }
 ];

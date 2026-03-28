@@ -1,26 +1,78 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "tailwindcss-animate";
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-mits-blue: #0F52BA;
+  --color-mits-cyan: #00A8E8;
+  --color-mits-red: #EF4444;
+  --color-mits-yellow: #F59E0B;
+  --color-mits-gray: #6B7280;
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* Softer, more premium base background instead of flat white */
+  --background: #F5F7FB;
+  --foreground: #0F172A;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hero-text {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Subtle Film Grain Noise Texture */
+.bg-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.15;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Soft Radial Blooms for Visual Rhythm */
+.bg-radial-glow {
+  position: absolute;
+  width: 80vw;
+  height: 80vw;
+  max-width: 1000px;
+  max-height: 1000px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 168, 232, 0.03) 0%, rgba(245, 247, 251, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-radial-glow-blue {
+  background: radial-gradient(circle, rgba(15, 82, 186, 0.03) 0%, rgba(245, 247, 251, 0) 70%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F7FB;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
