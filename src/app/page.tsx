@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroCanvas from "@/components/HeroCanvas";
+import Link from "next/link";
 import QuickLinks from "@/components/QuickLinks";
 import QuickAccess from "@/components/QuickAccess";
 import SectionWrapper from "@/components/SectionWrapper";
@@ -77,9 +78,15 @@ export default function HomeLayout() {
         <div className="bg-noise" />
         <div className="bg-radial-glow bg-radial-glow-blue -top-[20rem] -left-[20rem]" />
         
-        <SectionWrapper id="about" className="pt-32 pb-24">
+        <SectionWrapper id="about" className="pt-32 pb-24" variant="slide-right">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div className="relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
               <SpiralDoodle className="-top-12 -left-12" />
               <div className="flex items-center gap-2 text-blue-600 font-bold tracking-widest uppercase text-xs mb-6 bg-blue-50 w-max px-4 py-2 rounded-full border border-blue-100">
                 <Building2 size={14} /> Since 1957
@@ -96,7 +103,10 @@ export default function HomeLayout() {
               <div className="grid grid-cols-3 gap-8 p-8 bg-white/70 backdrop-blur-md rounded-3xl border border-white shadow-xl shadow-slate-200/50">
                 {stats.map((s, i) => (
                   <motion.div 
-                    initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.5, type: "spring" }}
+                    initial={{ opacity: 0, scale: 0.8 }} 
+                    whileInView={{ opacity: 1, scale: 1 }} 
+                    viewport={{ once: true }} 
+                    transition={{ delay: 0.4 + (i * 0.1), duration: 0.5, type: "spring" }}
                     key={s.label} className="flex flex-col gap-2"
                   >
                     <span className="text-4xl md:text-5xl font-black text-slate-800 tracking-tighter">{s.value}</span>
@@ -104,36 +114,54 @@ export default function HomeLayout() {
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
             
-            <div className="relative group w-full max-w-[500px] lg:max-w-none mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, x: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative group w-full max-w-[500px] lg:max-w-none mx-auto"
+            >
               {/* Solid colored backdrop framing as seen in reference (left and bottom offset) */}
               <div className="absolute inset-0 bg-[#D8F0F8] rounded-[2.5rem] transform translate-y-6 -translate-x-6 -z-10 transition-transform duration-500 group-hover:translate-x-0 group-hover:translate-y-0" />
               <img src="/students.png" alt="MITS Students" className="relative rounded-[2.5rem] object-cover h-[450px] md:h-[600px] w-full shadow-lg z-10 transition-transform duration-500" />
-            </div>
+            </motion.div>
           </div>
         </SectionWrapper>
 
         {/* Academics Section */}
         <div className="bg-slate-50/50 border-y border-slate-200/50 relative overflow-hidden">
            <div className="bg-radial-glow -right-[20rem] top-[10rem]" />
-           <SectionWrapper id="academics" className="py-24 md:py-32">
-            <div className="text-center max-w-2xl mx-auto mb-16 relative">
+           <SectionWrapper id="academics" className="py-24 md:py-32" variant="fade-up">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center max-w-2xl mx-auto mb-16 relative"
+            >
               <SpiralDoodle className="-top-8 right-0" />
               <div className="flex items-center justify-center gap-2 text-cyan-600 font-bold tracking-widest uppercase text-xs mb-4">
                 <Library size={14} /> Knowledge Base
               </div>
               <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight hero-text mb-4">Academic Resources</h2>
               <p className="text-lg font-medium text-slate-500">Find your scheme, syllabus, and important academic documents in one intelligent interface.</p>
-            </div>
+            </motion.div>
             <AcademicsSection />
           </SectionWrapper>
         </div>
 
         {/* Departments */}
-        <SectionWrapper id="departments" className="py-24 md:py-32 relative">
+        <SectionWrapper id="departments" className="py-24 md:py-32 relative" variant="slide-left">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 relative">
-            <div className="max-w-2xl">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-2xl"
+            >
               <div className="flex items-center gap-2 text-emerald-600 font-bold tracking-widest uppercase text-xs mb-4">
                 <Grid size={14} /> Programs
               </div>
@@ -141,20 +169,35 @@ export default function HomeLayout() {
                 Pioneering <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-cyan-500">Departments</span>
               </h2>
               <p className="text-lg font-medium text-slate-500">Explore our cutting-edge departments equipped with world-class facilities and expert faculty guiding the complete lifecycle of innovation.</p>
-            </div>
-            <button className="hidden md:flex text-slate-600 font-bold items-center gap-1 hover:text-emerald-500 transition-colors h-10">
+            </motion.div>
+            <Link href="/departments" className="hidden md:flex text-slate-600 font-bold items-center gap-1 hover:text-emerald-500 transition-colors h-10">
               View All <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
             {departments.map((dept, i) => (
               <motion.div 
                 key={dept.name} 
-                initial={{ opacity: 0, y: 30 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
-                viewport={{ once: true }} 
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                variants={{
+                  hidden: { opacity: 0, y: 30, scale: 0.95 },
+                  visible: { opacity: 1, y: 0, scale: 1 }
+                }}
+                transition={{ duration: 0.5 }}
                 className="group p-8 rounded-3xl border border-white bg-white/70 backdrop-blur-md hover:bg-white hover:border-transparent hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all duration-300 cursor-pointer overflow-hidden relative"
               >
                 <div className={`w-16 h-16 rounded-2xl border ${dept.bg} ${dept.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg transition-all duration-300`}>
@@ -167,12 +210,12 @@ export default function HomeLayout() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </SectionWrapper>
 
         {/* Announcements */}
         <div className="bg-slate-900 relative">
-          <SectionWrapper id="announcements" className="py-24 md:py-32 rounded-[3.5rem] bg-slate-900 text-white relative z-10 overflow-hidden shadow-2xl my-4 mx-4 md:mx-auto border border-slate-800">
+          <SectionWrapper id="announcements" className="py-24 md:py-32 rounded-[3.5rem] bg-slate-900 text-white relative z-10 overflow-hidden shadow-2xl my-4 mx-4 md:mx-auto border border-slate-800" variant="pop-up">
             {/* dark mode blobs */}
             <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-indigo-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-blue-500/10 rounded-full blur-3xl -z-10 pointer-events-none" />
@@ -185,11 +228,25 @@ export default function HomeLayout() {
               <p className="text-lg font-medium text-slate-400">Stay informed with the latest notifications, events, and important schedules right when they drop.</p>
             </div>
             
-            <div className="max-w-4xl mx-auto space-y-4">
+            <motion.div 
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.15
+                  }
+                }
+              }}
+              className="max-w-4xl mx-auto space-y-4"
+            >
               {announcements.map((ann, i) => (
                 <AnnouncementCard key={ann.id} {...ann} index={i} />
               ))}
-            </div>
+            </motion.div>
             <div className="mt-12 text-center">
               <button className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-3.5 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95 text-sm uppercase tracking-widest">
                 View All Notices
@@ -199,15 +256,20 @@ export default function HomeLayout() {
         </div>
 
         {/* Student Resources */}
-        <SectionWrapper id="resources" className="py-24 md:py-32">
-          <div className="text-center mb-16 relative">
+        <SectionWrapper id="resources" className="py-24 md:py-32" variant="fade-up">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16 relative"
+          >
             <LineDoodle className="top-0 right-[20%]" />
             <div className="flex items-center justify-center gap-2 text-blue-600 font-bold tracking-widest uppercase text-xs mb-4">
               <LayoutDashboard size={14} /> Platform
             </div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight hero-text mb-4">Student Hub</h2>
             <p className="text-lg font-medium text-slate-500 max-w-2xl mx-auto">Everything you need from your first day to graduation, organized perfectly.</p>
-          </div>
+          </motion.div>
           
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {resourceTabs.map(tab => (
@@ -224,20 +286,27 @@ export default function HomeLayout() {
           <AnimatePresence mode="wait">
             <motion.div 
               key={activeTab}
-              initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
-              transition={{ duration: 0.3 }}
-              className="bg-white/60 backdrop-blur-xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-16 text-center max-w-4xl mx-auto"
+              exit={{ opacity: 0, y: -20, filter: "blur(4px)" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="bg-white/60 backdrop-blur-xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-16 text-center max-w-4xl mx-auto relative overflow-hidden group"
             >
-              <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-blue-100 shadow-inner">
-                <Code size={36} strokeWidth={2} />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
+                <motion.div 
+                  initial={{ scale: 0.8 }}
+                  animate={{ scale: 1 }}
+                  className="w-20 h-20 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-blue-100 shadow-inner"
+                >
+                  <Code size={36} strokeWidth={2} />
+                </motion.div>
+                <h3 className="text-3xl font-extrabold text-slate-800 tracking-tight mb-4">{activeTab} Resources</h3>
+                <p className="text-lg text-slate-500 font-medium max-w-md mx-auto mb-10 leading-relaxed">The resources for {activeTab.toLowerCase()} are currently being assembled for the upcoming semester interface.</p>
+                <button className="bg-blue-600 text-white font-bold py-4 px-8 rounded-2xl flex items-center justify-center gap-2 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 active:scale-95 mx-auto">
+                  Explore Directory <ArrowRight size={18} strokeWidth={3} />
+                </button>
               </div>
-              <h3 className="text-3xl font-extrabold text-slate-800 tracking-tight mb-4">{activeTab} Resources</h3>
-              <p className="text-lg text-slate-500 font-medium max-w-md mx-auto mb-10 leading-relaxed">The resources for {activeTab.toLowerCase()} are currently being assembled for the upcoming semester interface.</p>
-              <button className="bg-blue-600 text-white font-bold py-4 px-8 rounded-2xl flex items-center justify-center gap-2 transition-all hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 active:scale-95 mx-auto">
-                Explore Directory <ArrowRight size={18} strokeWidth={3} />
-              </button>
             </motion.div>
           </AnimatePresence>
         </SectionWrapper>

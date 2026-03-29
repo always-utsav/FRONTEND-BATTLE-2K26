@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { branches, years, schemes } from "@/data/academicsData";
-import { Download, FileText, SearchX } from "lucide-react";
+import { Download, FileText, SearchX, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -78,8 +79,13 @@ export default function AcademicsSection() {
                 Showing resources for <strong className="text-slate-800">{branches.find(b => b.id === selectedBranch)?.short}</strong> &bull; Year {selectedYear}
               </p>
             </div>
-            <div className="hidden sm:flex text-sm font-semibold text-slate-400 bg-slate-100 px-4 py-2 rounded-full">
-              {filteredSchemes.length} Results
+            <div className="hidden sm:flex flex-col items-end gap-3">
+              <div className="text-sm font-semibold text-slate-400 bg-slate-100 px-4 py-2 rounded-full">
+                {filteredSchemes.length} Results
+              </div>
+              <Link href="/scheme" className="text-blue-600 font-bold text-xs uppercase tracking-widest flex items-center gap-1 hover:underline">
+                View All Schemes <ArrowRight size={14} />
+              </Link>
             </div>
           </div>
 

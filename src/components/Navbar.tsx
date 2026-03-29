@@ -55,9 +55,11 @@ export default function Navbar() {
         {/* Right Section */}
         <div className="hidden md:flex items-center gap-5">
           <SearchBar isScrolled={isScrolled} />
-          <button className={`px-6 py-2.5 rounded-2xl font-bold text-sm transition-all hover:shadow-lg active:scale-95 border ${isScrolled ? "bg-black hover:bg-slate-800 text-white border-white/10 shadow-black/20" : "bg-white text-slate-900 hover:bg-white/90 border-transparent shadow-white/20"}`}>
-            Login
-          </button>
+          <Link href="/login">
+            <button className={`px-6 py-2.5 rounded-2xl font-bold text-sm transition-all hover:shadow-lg active:scale-95 border ${isScrolled ? "bg-black hover:bg-slate-800 text-white border-white/10 shadow-black/20" : "bg-white text-slate-900 hover:bg-white/90 border-transparent shadow-white/20"}`}>
+              Login
+            </button>
+          </Link>
         </div>
 
         {/* Mobile menu toggle */}
@@ -84,9 +86,11 @@ export default function Navbar() {
           <div className="pt-4">
             <SearchBar />
           </div>
-          <button className="bg-black text-white px-4 py-4 rounded-xl font-bold w-full mt-4 shadow-lg shadow-black/20">
-            Login to Portal
-          </button>
+          <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+            <button className="bg-black text-white px-4 py-4 rounded-xl font-bold w-full mt-4 shadow-lg shadow-black/20">
+              Login to Portal
+            </button>
+          </Link>
         </motion.div>
       )}
     </motion.header>
